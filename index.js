@@ -1,4 +1,4 @@
-const papaparse = require("papaparse");
+const Papa = require("papaparse");
 const fs = require("fs");
 
 const songFilePath = "./csv/song.csv";
@@ -16,3 +16,22 @@ Papa.parse(songFile, {
   },
 });
 
+console.log(songRows.data);
+
+const songArray = songRows.data.map((row) => {
+  const { id, artist, title, year } = row;
+  const edittedTitle = title.replace(/,/g, " ");
+
+  return { title: edittedTitle, id, artist, year };
+});
+
+const songData = Papa.unparse(songArray);
+createFile("./csv/songTable.csv", songData, "Song Table successfully saved!");
+
+function createFile(filePath, data, msg) {
+  fs.writeFile(filePath, data, err => {
+    if (err) throw err;
+    console.log(msg);
+  });
+}
+ 
