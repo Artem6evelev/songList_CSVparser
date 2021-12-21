@@ -10,6 +10,7 @@ Creating Express JS API from scratch, store all data in MySql, develop functiona
 Server:
 1. npm i
 2. npm start
+
 Client:
 4. cd my-app
 5. npm i
